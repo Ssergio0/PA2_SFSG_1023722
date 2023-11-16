@@ -127,7 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="DataRecord.cpp" />
+    <ClCompile Include="HashFunction.cpp" />
     <ClCompile Include="InMemorDB.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="DataRecord.h" />
+    <ClInclude Include="HashFunction.h" />
+    <ClInclude Include="LinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
