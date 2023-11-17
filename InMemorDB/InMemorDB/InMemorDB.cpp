@@ -19,12 +19,20 @@ void loadData(LinkedList& list) {
     std::string filename;
     std::cout << "Ingrese el nombre del archivo de datos: ";
     std::cin >> filename;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpia el búfer de entrada
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//Linea que limpiará el búfer de entrada
+    // Contador para los datos cargados
+    int count = FileManager::readFile(filename, list);
 
-    FileManager::readFile(filename, list);
-    std::cout << "Datos cargados correctamente." << std::endl;
+    if (count == 0) {
+        std::cout << "No se cargaron datos. Asegúrese de que el archivo existe y tiene el formato correcto." << std::endl;
+    }
+    else {
+        std::cout << "Datos cargados correctamente. Número de sets de datos cargados: " << count << std::endl;
+    }
 }
+
+
 
 /*void searchData(LinkedList& list) {
     std::string key;
