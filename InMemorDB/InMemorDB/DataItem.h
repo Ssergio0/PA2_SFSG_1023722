@@ -8,5 +8,7 @@ public:
 	DataItem* next;
 	DataItem* prev;
 
+	DataItem(std::string key, std::string data);
+
 };
 

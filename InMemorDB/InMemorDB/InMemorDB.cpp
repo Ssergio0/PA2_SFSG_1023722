@@ -7,7 +7,7 @@
 #include<string>
 
 void printMenu() {
-    std::cout << "==============GESTIÓN DE DATOS===============" << std::endl;
+    std::cout << "==============GESTION DE DATOS===============" << std::endl;
     std::cout << "1. Cargar Datos desde archivo." << std::endl;
     std::cout << "2. Buscar Datos." << std::endl;
     std::cout << "3.Salir" << std::endl;
@@ -18,6 +18,8 @@ void loadData(LinkedList& list) {
     std::string filename;
     std::cout << "Ingrese el nombre del archivo de datos: ";
     std::cin >> filename;
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//Linea que limpiará el búfer de entrada
 
     FileManager::readFile(filename, list);
     std::cout << "Datos cargados correctamente." << std::endl;
@@ -43,6 +45,12 @@ int main()
     {
         printMenu();
         std::cin >> opcion;
+        if (std::cin.fail())
+        {
+            std::cin.clear();//limpia el estado del error
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//descarta la linea incorrecta
+            std::cout << "Entrada Inválida, porfavor, intente de nuevo." << std::endl;
+        }
 
         switch (opcion)
         {
@@ -57,6 +65,7 @@ int main()
             return 0;
         default:
             std::cout << "Opcion no valida. Intente de nuevo" << std::endl;
+            
         }
     }
 }
