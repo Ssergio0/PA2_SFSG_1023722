@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+#include"HashFunction.h"
 
 LinkedList::LinkedList() :head(nullptr), tail(nullptr) {}
 
@@ -39,13 +40,15 @@ DataItem* LinkedList::search(const std::string& key) {
 	return current;
 }
 
-std::vector<DataItem*>LinkedList::binarySearchByKey(const std::string& keyTerm) {
-	std::vector<DataItem*>results;
+std::vector<DataItem*> LinkedList::binarySearchByKey(const std::string& keyTerm) {
+	std::vector<DataItem*> results;
+	unsigned long hashedKeyTerm = HashFunction::hash(keyTerm);  // Hash del término de búsqueda
+
 	DataItem* current = head;
-	while (current!=nullptr)
-	{
-		if (current->keyPrimary.find(keyTerm) == 0)
+	while (current != nullptr) {
+		if (HashFunction::hash(current->keyPrimary) == hashedKeyTerm) {  // Compara hash de llave con hash buscado
 			results.push_back(current);
+		}
 		current = current->next;
 	}
 	return results;
