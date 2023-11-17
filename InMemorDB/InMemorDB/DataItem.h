@@ -3,12 +3,13 @@
 class DataItem
 {
 public:
-	std::string keyPrimary;
+	std::string originalKey;//llave original
+	std::string hashedKey;//llave hasheada
 	std::string data;
 	DataItem* next;
 	DataItem* prev;
 
-	DataItem(std::string key, std::string data);
+	DataItem(std::string origigKey, std::string hashKey,std::string data);
 
 };
 

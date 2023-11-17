@@ -13,7 +13,7 @@ LinkedList::~LinkedList() {
 	}
 }
 void LinkedList::insertSorted(DataItem* newItem) {
-	if (!head || newItem->keyPrimary < head->keyPrimary)
+	if (!head || newItem->originalKey < head->originalKey)
 	{
 		if (head) head->prev = newItem;
 		newItem->next = head;
@@ -22,7 +22,7 @@ void LinkedList::insertSorted(DataItem* newItem) {
 	}
 	
 	DataItem* current = head;
-	while (current->next && current->next->keyPrimary < newItem->keyPrimary) 
+	while (current->next && current->next->originalKey < newItem->originalKey) 
 		current = current->next;
 
 	newItem->next = current->next;
@@ -35,24 +35,24 @@ void LinkedList::insertSorted(DataItem* newItem) {
 
 DataItem* LinkedList::search(const std::string& key) {
 	DataItem* current = head;
-	while (current && current->keyPrimary != key)
+	while (current && current->originalKey != key)
 		current = current->next;
 	return current;
 }
 
 std::vector<DataItem*> LinkedList::binarySearchByKey(const std::string& keyTerm) {
 	std::vector<DataItem*> results;
-	unsigned long hashedKeyTerm = HashFunction::hash(keyTerm);  // Hash del término de búsqueda
-
 	DataItem* current = head;
+
 	while (current != nullptr) {
-		if (HashFunction::hash(current->keyPrimary) == hashedKeyTerm) {  // Compara hash de llave con hash buscado
+		if (current->originalKey.find(keyTerm) == 0) {
 			results.push_back(current);
 		}
 		current = current->next;
 	}
 	return results;
 }
+
 
 std::vector<DataItem*>LinkedList::sequentialSearchByValue(const std::string& value) {
 	std::vector<DataItem*>results;

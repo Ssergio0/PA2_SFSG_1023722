@@ -1,5 +1,5 @@
 // InMemorDB.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
+//C:\Users\Sergio Salguero\OneDrive\Histórico\Desktop\PA2_SFSG_1023722\list.txt
 
 #include <iostream>
 #include"FileManager.h"
