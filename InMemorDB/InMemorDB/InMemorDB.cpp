@@ -2,18 +2,61 @@
 //
 
 #include <iostream>
+#include"FileManager.h"
+#include"LinkedList.h"
+#include<string>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+void printMenu() {
+    std::cout << "==============GESTIÓN DE DATOS===============" << std::endl;
+    std::cout << "1. Cargar Datos desde archivo." << std::endl;
+    std::cout << "2. Buscar Datos." << std::endl;
+    std::cout << "3.Salir" << std::endl;
+    std::cout << "Seleccione una opcion:";
 }
 
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
+void loadData(LinkedList& list) {
+    std::string filename;
+    std::cout << "Ingrese el nombre del archivo de datos: ";
+    std::cin >> filename;
 
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
+    FileManager::readFile(filename, list);
+    std::cout << "Datos cargados correctamente." << std::endl;
+}
+
+void searchData(LinkedList& list) {
+    std::string key;
+    std::cout << "Ingrese la llave de búsqueda: ";
+    std::cin >> key;
+
+    DataItem* item = list.search(key);
+    if (item) 
+        std::cout << "Datos Encontrados: " << item->data << std::endl;
+    else 
+        std::cout << "No se encontraron datos para la llave: " << key << std::endl;
+}
+int main()
+{
+    LinkedList list;
+    int opcion;
+
+    while (true)
+    {
+        printMenu();
+        std::cin >> opcion;
+
+        switch (opcion)
+        {
+        case 1:
+            loadData(list);
+            break;
+        case 2:
+            searchData(list);
+            break;
+        case 3:
+            std::cout << "Saliendo del programa." << std::endl;
+            return 0;
+        default:
+            std::cout << "Opcion no valida. Intente de nuevo" << std::endl;
+        }
+    }
+}
