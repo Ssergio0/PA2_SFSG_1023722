@@ -27,7 +27,7 @@ void loadData(LinkedList& list) {
 
 void searchData(LinkedList& list) {
     std::string key;
-    std::cout << "Ingrese la llave de búsqueda: ";
+    std::cout << "Ingrese la llave de busqueda: ";
     std::cin >> key;
 
     DataItem* item = list.search(key);
@@ -35,6 +35,26 @@ void searchData(LinkedList& list) {
         std::cout << "Datos Encontrados: " << item->data << std::endl;
     else 
         std::cout << "No se encontraron datos para la llave: " << key << std::endl;
+}
+
+void searchByKey(LinkedList& list) {
+    std::string keyTerm;
+    std::cout << "Ingrese el termino de la llave a buscar: ";
+    std::cin >> keyTerm;
+
+    std::vector<DataItem*>results = list.binarySearchByKey(keyTerm);
+    for (auto& item : results)
+        std::cout << item->data << std::endl;
+}
+
+void searchByValue(LinkedList& list) {
+    std::string value;
+    std::cout << "Ingrese el valor a buscar: ";
+    std::cin >> value;
+
+    std::vector<DataItem*>results = list.sequentialSearchByValue(value);
+    for (auto& item : results)
+        std::cout << item->data << std::endl;
 }
 int main()
 {

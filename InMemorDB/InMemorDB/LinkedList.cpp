@@ -38,3 +38,26 @@ DataItem* LinkedList::search(const std::string& key) {
 		current = current->next;
 	return current;
 }
+
+std::vector<DataItem*>LinkedList::binarySearchByKey(const std::string& keyTerm) {
+	std::vector<DataItem*>results;
+	DataItem* current = head;
+	while (current!=nullptr)
+	{
+		if (current->keyPrimary.find(keyTerm) == 0)
+			results.push_back(current);
+		current = current->next;
+	}
+	return results;
+}
+
+std::vector<DataItem*>LinkedList::sequentialSearchByValue(const std::string& value) {
+	std::vector<DataItem*>results;
+	DataItem* current = head;
+	while (current != nullptr) {
+		if (current->data == value)
+			results.push_back(current);
+		current = current->next;
+	}
+	return results;
+}
