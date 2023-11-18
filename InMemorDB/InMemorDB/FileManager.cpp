@@ -8,7 +8,7 @@ FileManager::FileManager() {
 
 }
 
-void FileManager::CargarDatos() {
+/*void FileManager::CargarDatos() {
 	std::cout << "Ingrese la Ruta del .txt que se desea leer: ";
 	std::string ruta_archivo;
 	std::getline(std::cin, ruta_archivo);
@@ -27,15 +27,51 @@ void FileManager::CargarDatos() {
 	std::string linea;
 	int contadorLineas = 0;
 	while (std::getline(file, linea)) {
-		std::cout << "Leyendo línea: " << linea << std::endl;
+		//std::cout << "Leyendo línea: " << linea << std::endl;
 		contadorLineas++;
+	}
+	
+	file.close();
+	std::cout << "Total de líneas leídas: " << contadorLineas << std::endl;
+}*/
+
+
+void FileManager::CargarDatos() {
+	std::cout << "Ingrese la Ruta del .txt que se desea leer: ";
+	std::string ruta_archivo;
+	std::getline(std::cin, ruta_archivo);
+
+	std::ifstream file(ruta_archivo, std::ifstream::ate | std::ifstream::binary);
+	if (!file) {
+		std::cerr << "Error. No se pudo abrir el archivo: " << ruta_archivo << std::endl;
+		return;
+	}
+
+	// Determinar el tamaño del archivo
+	std::streamsize size = file.tellg();
+	file.seekg(0, std::ios::beg);
+
+	// Definir el tamaño de bloque basado en el tamaño del archivo
+	size_t blockSize = (size > 10000000) ? 10000 : 100; // Por ejemplo, 10,000 líneas para archivos grandes, 100 para pequeños
+
+	std::string linea;
+	std::vector<std::string> bloque;
+	while (std::getline(file, linea)) {
+		bloque.push_back(linea);
+		if (bloque.size() >= blockSize) {
+			// Procesar bloque de líneas aquí...
+			bloque.clear();
+		}
+	}
+
+	// Procesar el último bloque si no está vacío
+	if (!bloque.empty()) {
+		// Procesar bloque de líneas aquí...
 	}
 
 	file.close();
-	std::cout << "Total de líneas leídas: " << contadorLineas << std::endl;
+	std::cout << "Archivo procesado exitosamente." << std::endl;
 }
-
-
 
 
 void FileManager::BusquedaLlaveUsuario() {

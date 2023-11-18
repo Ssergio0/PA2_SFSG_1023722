@@ -1,6 +1,6 @@
 // InMemorDB.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //C:\Users\Sergio Salguero\OneDrive\Histórico\Desktop\PA2_SFSG_1023722\list.txt
-//C:\Users\Sergio Salguero\Downloads\InMemoryDB\InMemoryDB\list_prueba.txt
+//C:\Users\Sergio Salguero\OneDrive\Histórico\Desktop\PA2_SFSG_1023722\ListaReducida.txt
 #include "FileManager.h"
 #include <iostream>
 #include <string>
@@ -30,7 +30,7 @@ int main() {
             break;
         case 3:
             gestorDatos.BusquedaValorUsuario();
-            break;
+            break;  
         case 4:
             std::cout << "Finalizando el programa...\n";
             return 0;
