@@ -3,6 +3,7 @@
 class HashFunction
 {
 public:
-	static unsigned long hash(const std::string& key);
+	//static unsigned long hash(const std::string& key);
+	static std::string hash(const std::string& key);
 };
 

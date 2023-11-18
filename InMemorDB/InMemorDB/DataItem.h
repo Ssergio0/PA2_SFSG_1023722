@@ -1,15 +1,13 @@
-#pragma once
 #include <string>
-class DataItem
-{
+
+class DataItem {
 public:
-	std::string originalKey;//llave original
-	std::string hashedKey;//llave hasheada
-	std::string data;
-	DataItem* next;
-	DataItem* prev;
+    std::string originalKey;
+    std::string hashedKey;
+    std::string data;
+    DataItem* next;
+    DataItem* prev;
 
-	DataItem(std::string origigKey, std::string hashKey,std::string data);
-
+    DataItem(std::string origKey, std::string hashKey, std::string data);
 };
 

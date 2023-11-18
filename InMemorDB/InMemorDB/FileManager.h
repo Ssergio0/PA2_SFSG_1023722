@@ -1,9 +1,6 @@
-#include "LinkedList.h"
 #include <string>
 
-class FileManager {
+class HashFunction {
 public:
-    static int readFile(const std::string& filename, LinkedList& list);
+    static std::string hash(const std::string& key);
 };
-
-

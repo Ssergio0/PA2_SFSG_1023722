@@ -1,7 +1,7 @@
-// FileManager.cpp
 #include "FileManager.h"
 #include "HashFunction.h"
 #include "DataItem.h"
+#include"LinkedList.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -16,30 +16,21 @@ int FileManager::readFile(const std::string& filename, LinkedList& list) {
     int count = 0;
 
     while (std::getline(file, line)) {
-        // Imprimir cada línea leída para depuración
         std::cout << "Línea leída: " << line << std::endl;
 
-        if (line.empty()) {
-            // Si la línea está vacía, la ignoramos
-            continue;
-        }
+        if (line.empty()) continue;
 
         std::stringstream ss(line);
         std::string originalKey, restOfData;
         getline(ss, originalKey, ',');
-        getline(ss, restOfData); // Asumiendo que restOfData es el resto de la línea
+        getline(ss, restOfData);
 
-        if (originalKey.empty() || restOfData.empty()) {
-            // Si alguna parte esencial de los datos está vacía, la ignoramos
-            continue;
-        }
+        if (originalKey.empty() || restOfData.empty()) continue;
 
-        unsigned long hash = HashFunction::hash(originalKey);
-        std::string hashKey = std::to_string(hash).substr(0, 10);
+        std::string hashKey = HashFunction::hash(originalKey); // La función hash ahora devuelve std::string
 
-        // Agregar el nuevo DataItem a la lista
         list.insertSorted(new DataItem(originalKey, hashKey, restOfData));
-        count++; // Incrementar el contador solo si se agregó un DataItem
+        count++;
     }
     return count;
 }

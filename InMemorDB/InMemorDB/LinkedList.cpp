@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include"HashFunction.h"
+#include<iostream>
 
 LinkedList::LinkedList() :head(nullptr), tail(nullptr) {}
 
@@ -60,16 +61,18 @@ DataItem* LinkedList::search(const std::string& key) {
 }
 
 std::vector<DataItem*> LinkedList::binarySearchByKey(const std::string& keyTerm) {
-	std::vector<DataItem*> results;
-	DataItem* current = head;
+    std::string hashedKeyTerm = HashFunction::hash(keyTerm);
+    std::vector<DataItem*> results;
+    DataItem* current = head;
 
-	while (current != nullptr) {
-		if (current->originalKey.find(keyTerm) == 0) {
-			results.push_back(current);
-		}
-		current = current->next;
-	}
-	return results;
+    while (current != nullptr) {
+        if (current->hashedKey.substr(0, hashedKeyTerm.length()) == hashedKeyTerm) {
+            results.push_back(current);
+        }
+        current = current->next;
+    }
+
+    return results;
 }
 
 
