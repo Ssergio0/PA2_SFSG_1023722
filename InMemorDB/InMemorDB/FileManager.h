@@ -1,17 +1,16 @@
-#include <string>
-#include<vector>
+#pragma once
+#include"LinkedList.h"
+#include<string>
 
 class FileManager {
 private:
-    std::string primaryKey;
-    std::vector<std::string>datos;
-    std::string nextKey;
-
+	LinkedList Registros;
+	void mostrarRegistrosLlave(const std::string& keyHash, int initialIndex);
 public:
-    FileManager(const std::string& linea);
-    std::string getPrimaryKey() const;
-    std::string getNextKey()const;
-
-    void showData()const;
-    bool searchSequentialValue(const std::string& valor)const;
+	FileManager();
+	void CargarDatos();
+	void BusquedaLlave(const std::string& key);
+	void BusquedaLlaveUsuario();
+	void BusquedaValor(const std::string& valor);
+	void BusquedaValorUsuario();
 };

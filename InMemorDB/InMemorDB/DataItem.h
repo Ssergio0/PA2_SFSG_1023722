@@ -1,13 +1,17 @@
 #include <string>
+#include<vector>
 
 class DataItem {
+private:
+    std::string primaryKey;
+    std::vector<std::string>datos;
+    std::string nextKey;
+
 public:
-    std::string originalKey;
-    std::string hashedKey;
-    std::string data;
-    DataItem* next;
-    DataItem* prev;
+    DataItem(const std::string& linea);
+    std::string getPrimaryKey() const;
+    std::string getNextKey()const;
 
-    DataItem(std::string origKey, std::string hashKey, std::string data);
+    void showData()const;
+    bool searchSequentialValue(const std::string& valor)const;
 };
-

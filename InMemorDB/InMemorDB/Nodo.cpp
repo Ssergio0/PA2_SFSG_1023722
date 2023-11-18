@@ -1,9 +1,9 @@
 #include "Nodo.h"
 
-Nodo::Nodo(const FileManager& dato) : dato(dato), anterior(nullptr), siguiente(nullptr) {
+Nodo::Nodo(const DataItem& dato) : dato(dato), anterior(nullptr), siguiente(nullptr) {
 }
 
-FileManager Nodo::getDato() const {
+DataItem Nodo::getDato() const {
     return dato;
 }
 
