@@ -2,35 +2,35 @@
 #include "HashFunction.h"
 #include "DataItem.h"
 #include"LinkedList.h"
+#include"FileManager.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
-int FileManager::readFile(const std::string& filename, LinkedList& list) {
-    std::ifstream file(filename);
-    if (!file) {
-        std::cerr << "Error al abrir el archivo." << std::endl;
-        return 0;
-    }
-    std::string line;
-    int count = 0;
-
-    while (std::getline(file, line)) {
-        std::cout << "Línea leída: " << line << std::endl;
-
-        if (line.empty()) continue;
-
-        std::stringstream ss(line);
-        std::string originalKey, restOfData;
-        getline(ss, originalKey, ',');
-        getline(ss, restOfData);
-
-        if (originalKey.empty() || restOfData.empty()) continue;
-
-        std::string hashKey = HashFunction::hash(originalKey); // La función hash ahora devuelve std::string
-
-        list.insertSorted(new DataItem(originalKey, hashKey, restOfData));
-        count++;
-    }
-    return count;
+FileManager::FileManager(const std::string& linea) {
+	std::istringstream stream(linea);
+	std::string elemento;
+	std::getline(stream, primaryKey, ',');
+	while (std::getline(stream, elemento, ',') && stream.peek() != '\n') { datos.push_back(elemento); }
+	std::getline(stream, nextKey);
 }
+bool FileManager::searchSequentialValue(const std::string& valor)const {
+	for (const auto& dato : datos) {
+		if (dato == valor)
+			return true;
+	}
+	return false;
+}
+
+std::string FileManager::getPrimaryKey()const {
+	return primaryKey;
+}
+std::string FileManager::getNextKey()const {
+	return nextKey;
+}
+void FileManager::showData()const {
+	std::cout << "Llave Principal: " << primaryKey << std::endl;
+	std::cout << "Datos: ";
+	for (const auto& dato : datos)std::cout << dato << " ";
+}
+

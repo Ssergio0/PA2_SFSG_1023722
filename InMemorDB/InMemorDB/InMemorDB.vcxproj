@@ -134,6 +134,7 @@
     <ClCompile Include="HashFunction.cpp" />
     <ClCompile Include="InMemorDB.cpp" />
     <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="Nodo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataItem.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="HashFunction.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Nodo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
