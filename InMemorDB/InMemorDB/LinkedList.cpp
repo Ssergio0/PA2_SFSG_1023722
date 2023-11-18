@@ -68,7 +68,7 @@ Nodo* LinkedList::search(const std::string& llave) const {
 void LinkedList::erase(const std::string& llave) {
     Nodo* current = head;
     while (current != nullptr) {
-        if (current->getDato().get.PrimaryKey() == llave) {
+        if (current->getDato().getPrimaryKey() == llave) { // Corregido aquí
             if (current == head) {
                 head = head->getSiguiente();
                 if (head != nullptr) {
@@ -76,14 +76,16 @@ void LinkedList::erase(const std::string& llave) {
                 }
             }
             else if (current == tail) {
-                head = head->getAnterior();
+                tail = tail->getAnterior(); // Corregido aquí, debería ser tail en lugar de head
                 if (tail != nullptr) {
                     tail->setSiguiente(nullptr);
                 }
             }
             else {
                 current->getAnterior()->setSiguiente(current->getSiguiente());
-                current->getSiguiente()->setAnterior(current->getAnterior());
+                if (current->getSiguiente() != nullptr) {
+                    current->getSiguiente()->setAnterior(current->getAnterior());
+                }
             }
             delete current;
             longitud--;
@@ -92,6 +94,7 @@ void LinkedList::erase(const std::string& llave) {
         current = current->getSiguiente();
     }
 }
+
 int LinkedList::getLongitud() const {
     return longitud; // Asumiendo que tienes un atributo 'longitud' que lleva la cuenta de la longitud de la lista
 }

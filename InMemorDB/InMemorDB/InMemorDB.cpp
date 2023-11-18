@@ -1,106 +1,43 @@
 // InMemorDB.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //C:\Users\Sergio Salguero\OneDrive\Histórico\Desktop\PA2_SFSG_1023722\list.txt
 //C:\Users\Sergio Salguero\Downloads\InMemoryDB\InMemoryDB\list_prueba.txt
-
+#include "FileManager.h"
 #include <iostream>
-#include"FileManager.h"
-#include"LinkedList.h"
-#include<string>
+#include <string>
 
-void printMenu() {
-    std::cout << "==============GESTION DE DATOS===============" << std::endl;
-    std::cout << "1. Cargar Datos desde archivo." << std::endl;
-    std::cout << "2. Buscar Datos por Llave." << std::endl;
-    std::cout << "3. Buscar Datos por Valor" << std::endl;
-    std::cout << "4. Salir" << std::endl;
-    std::cout << "Seleccione una opcion:";
-}
+int main() {
+    FileManager gestorDatos;
+    int opcion = 0;
 
-void loadData(LinkedList& list) {
-    std::string filename;
-    std::cout << "Ingrese el nombre del archivo de datos: ";
-    std::cin >> filename;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpia el búfer de entrada
-
-    // Contador para los datos cargados
-    int count = FileManager::readFile(filename, list);
-
-    if (count == 0) {
-        std::cout << "No se cargaron datos. Asegúrese de que el archivo existe y tiene el formato correcto." << std::endl;
-    }
-    else {
-        std::cout << "Datos cargados correctamente. Numero de sets de datos cargados: " << count << std::endl;
-    }
-}
-
-
-
-/*void searchData(LinkedList& list) {
-    std::string key;
-    std::cout << "Ingrese la llave de busqueda: ";
-    std::cin >> key;
-
-    DataItem* item = list.search(key);
-    if (item) 
-        std::cout << "Datos Encontrados: " << item->data << std::endl;
-    else 
-        std::cout << "No se encontraron datos para la llave: " << key << std::endl;
-}*/
-
-void searchByKey(LinkedList& list) {
-    std::string keyTerm;
-    std::cout << "Ingrese el termino de la llave a buscar: ";
-    std::cin >> keyTerm;
-
-    std::vector<DataItem*>results = list.binarySearchByKey(keyTerm);
-    for (auto& item : results)
-        std::cout << item->data << std::endl;
-}
-
-void searchByValue(LinkedList& list) {
-    std::string value;
-    std::cout << "Ingrese el valor a buscar: ";
-    std::cin >> value;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    std::vector<DataItem*>results = list.sequentialSearchByValue(value);
-    for (auto& item : results)
-        std::cout << item->data << std::endl;
-}
-int main()
-{
-    LinkedList list;
-    int opcion;
-
-    while (true)
-    {
-        printMenu();
+    while (true) {
+        std::cout << "\n--- Sistema de Gestion de Datos ---\n";
+        std::cout << "1. Cargar Datos desde Archivo\n";
+        std::cout << "2. Buscar Datos por Llave\n";
+        std::cout << "3. Buscar Datos por Valor\n";
+        std::cout << "4. Salir\n";
+        std::cout << "Seleccione una opcion: ";
         std::cin >> opcion;
-        if (std::cin.fail())
-        {
-            std::cin.clear();//limpia el estado del error
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//descarta la linea incorrecta
-            std::cout << "Entrada Invalida, porfavor, intente de nuevo." << std::endl;
-            continue;
-        }
 
-        switch (opcion)
-        {
+        // Limpieza del buffer de entrada
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        switch (opcion) {
         case 1:
-            loadData(list);
+            gestorDatos.CargarDatos();
             break;
         case 2:
-            searchByKey(list);
+            gestorDatos.BusquedaLlaveUsuario();
             break;
         case 3:
-            searchByValue(list);
+            gestorDatos.BusquedaValorUsuario();
             break;
         case 4:
-            std::cout << "Saliendo del programa." << std::endl;
+            std::cout << "Finalizando el programa...\n";
             return 0;
         default:
-            std::cout << "Opcion no valida. Intente de nuevo" << std::endl;
-            
+            std::cout << "Opcion no válida. Por favor, intente nuevamente.\n";
         }
     }
+
+    return 0;
 }

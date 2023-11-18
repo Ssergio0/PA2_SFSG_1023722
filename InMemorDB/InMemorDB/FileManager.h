@@ -11,6 +11,6 @@ public:
 	void CargarDatos();
 	void BusquedaLlave(const std::string& key);
 	void BusquedaLlaveUsuario();
-	void BusquedaValor(const std::string& valor);
 	void BusquedaValorUsuario();
+	void busquedaValor(const std::string& valor);
 };

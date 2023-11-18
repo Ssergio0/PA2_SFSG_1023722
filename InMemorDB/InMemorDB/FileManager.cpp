@@ -7,24 +7,36 @@
 FileManager::FileManager() {
 
 }
+
 void FileManager::CargarDatos() {
-	std::string ruta_archivo;
 	std::cout << "Ingrese la Ruta del .txt que se desea leer: ";
+	std::string ruta_archivo;
 	std::getline(std::cin, ruta_archivo);
+
+	// Verificar si el archivo existe
 	std::ifstream file(ruta_archivo);
 	if (!file) {
-		std::cerr << "Error. No se pudo abrir el archivo." << std::endl;
+		std::cerr << "Error. No se pudo abrir el archivo en la ruta: " << ruta_archivo << std::endl;
 		return;
 	}
-	std::string linea;
-	while (std::getline(file, linea)) {
-		FileManager registro(linea);
-		std::string keyHash = HashFunction::hashFunction(registro.getPrimaryKey());
-		registro.insertar(registro);
+	else {
+		std::cout << "Archivo abierto correctamente." << std::endl;
 	}
+
+	// Leer y mostrar cada línea del archivo
+	std::string linea;
+	int contadorLineas = 0;
+	while (std::getline(file, linea)) {
+		std::cout << "Leyendo línea: " << linea << std::endl;
+		contadorLineas++;
+	}
+
 	file.close();
-	std::cout << "Datos cargados de forma exitosa: " << ruta_archivo << std::endl;
+	std::cout << "Total de líneas leídas: " << contadorLineas << std::endl;
 }
+
+
+
 
 void FileManager::BusquedaLlaveUsuario() {
 	std::string key;
@@ -64,8 +76,11 @@ void FileManager::BusquedaLlave(const std::string& key) {
 void FileManager::mostrarRegistrosLlave(const std::string& keyHash, int startIndex) {
 	Nodo* actual = Registros.getNodoEnIndex(startIndex);
 
-	while (actual != nullptr && HashFunction::hashFunction(actual->getDato().getPrimaryKey() == keyHash) {
-		actual->getDato().mostrarDatos();
+	while (actual != nullptr) {
+		std::string actualKeyHash = HashFunction::hashFunction(actual->getDato().getPrimaryKey());
+		if (actualKeyHash == keyHash) {
+			actual->getDato().showData();
+		}
 		actual = actual->getSiguiente();
 	}
 }
@@ -73,21 +88,23 @@ void FileManager::BusquedaValorUsuario() {
 	std::string valor;
 	std::cout << "Ingrese el valor que quiere ver para buscarlo: ";
 	std::getline(std::cin, valor);
-	BusquedaValor(valor);
+	busquedaValor(valor);
 }
 
 void FileManager::busquedaValor(const std::string& valor) {
-	Nodo* actual = Registros.getHead();
+	Nodo* actual = Registros.getHead(); // Asegúrate de que getHead() sea un método público en LinkedList
 	bool foundit = false;
-	while (actual != nullptr) {
-		const FileManager& registro = actual->getDato();
 
-		if (registro.searchSequentialValue(const std::string & valor)const) {
+	while (actual != nullptr) {
+		const DataItem& registro = actual->getDato();
+
+		if (registro.searchSequentialValue(valor)) {
 			registro.showData();
 			foundit = true;
 		}
-		actual = actual - getSiguiente();
+		actual = actual->getSiguiente();
 	}
+
 	if (!foundit) {
 		std::cout << "No se han podido encontrar registros con el valor solicitado: " << valor << std::endl;
 	}
