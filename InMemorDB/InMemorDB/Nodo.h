@@ -3,13 +3,13 @@
 class Nodo
 {
 private:
-	FileManager dato;
+	DataItem dato;
 	Nodo* anterior;
 	Nodo* siguiente;
 
 public:
-	Nodo(const FileManager& dato);
-	FileManager getDato()const;
+	Nodo(const DataItem& dato);
+	DataItem getDato()const;
 	Nodo* getAnterior()const;
 	Nodo* getSiguiente()const;
 	void setAnterior(Nodo* ant);
