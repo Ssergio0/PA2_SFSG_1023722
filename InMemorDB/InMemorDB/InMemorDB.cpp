@@ -1,5 +1,6 @@
 // InMemorDB.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //C:\Users\Sergio Salguero\OneDrive\Histórico\Desktop\PA2_SFSG_1023722\list.txt
+//C:\Users\Sergio Salguero\Downloads\InMemoryDB\InMemoryDB\list_prueba.txt
 
 #include <iostream>
 #include"FileManager.h"
@@ -28,7 +29,7 @@ void loadData(LinkedList& list) {
         std::cout << "No se cargaron datos. Asegúrese de que el archivo existe y tiene el formato correcto." << std::endl;
     }
     else {
-        std::cout << "Datos cargados correctamente. Número de sets de datos cargados: " << count << std::endl;
+        std::cout << "Datos cargados correctamente. Numero de sets de datos cargados: " << count << std::endl;
     }
 }
 
@@ -79,7 +80,7 @@ int main()
         {
             std::cin.clear();//limpia el estado del error
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//descarta la linea incorrecta
-            std::cout << "Entrada Inválida, porfavor, intente de nuevo." << std::endl;
+            std::cout << "Entrada Invalida, porfavor, intente de nuevo." << std::endl;
             continue;
         }
 
