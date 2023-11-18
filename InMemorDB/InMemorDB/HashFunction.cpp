@@ -1,7 +1,7 @@
 
 #include "HashFunction.h"
 
-std::string HashFunction::hash(const std::string& key) {
+std::string HashFunction::hashFunction(const std::string& key) {
     unsigned long hash = 0;
     for (char c : key) {
         hash = (hash * 31) + c; // Usando 31 como base para la dispersión
