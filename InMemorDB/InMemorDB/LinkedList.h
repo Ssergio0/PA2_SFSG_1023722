@@ -2,19 +2,29 @@
 
 #include "DataItem.h"
 #include "DataRecord.h"
+#include "Nodo.h"
 #include <memory>
 #include <unordered_map>
 
 class LinkedList
 {
 private:
-	DataItem* head;
-	DataItem* tail;
+	Nodo* head;
+	Nodo* tail;
+	int longitud;
 	
 
 public:
 	LinkedList();
 	~LinkedList();
+
+	void insertar(const DataItem& FileManager);
+	Nodo* search(const std::string& key)const;
+	void erase(const std::string& key);
+	int getLongitud()const;
+	Nodo* getNodoEnIndex(int index)const;
+	Nodo* getHead()const;
+
 
 	void insertSorted(DataItem* newItem);
 	DataItem* search(const std::string& key);
